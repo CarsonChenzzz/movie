@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Comment</title>
+     <script type="text/javascript" src="javascripts/xheditor/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="javascripts/xheditor/xheditor-1.2.2.min.js"></script>
+    <script type="text/javascript" src="javascripts/xheditor/xheditor_lang/zh-cn.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include header %>
+    <form action="/comment/submit" method="post" id="frmDemo">
+      <label>
+        标题:<input type="text" name="title"/>
+      </label>
+      <label>
+        内容:
+        <textarea cols="120" rows="30" name="content" id="content"></textarea>
+      </label>
+      <label>
+        <input type="submit" name="submit" value="提交" />
+      </label> 
+    </form>
+
+    <script type="text/javascript">
+    $(pageInit);
+    function pageInit()
+    {
+      $.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});
+      $('#content').xheditor({
+        html5Upload:false,
+        upMultiple:'1',
+
+        
+        upLinkUrl:"upload.php",
+        upLinkExt:"zip,rar,txt",
+
+        upImgUrl:"/uploadImg",
+        upImgExt:"jpg,jpeg,gif,png",
+
+        upFlashUrl:"upload.php",
+        upFlashExt:"swf",
+
+        upMediaUrl:"upload.php",
+        upMediaExt:"wmv,avi,wma,mp3,mid"
+      });
+
+    }
+    function insertUpload(arrMsg)
+    {console.log(arrMsg)
+      var i,msg;
+      for(i=0;i<arrMsg.length;i++)
+      {
+        msg=arrMsg[i];
+        $("#uploadList").append('<option value="'+msg.id+'">'+msg.localname+'</option>');
+      }
+    }
+    function submitForm(){$('#frmDemo').submit();}
+    </script>
+  </body>
+</html>

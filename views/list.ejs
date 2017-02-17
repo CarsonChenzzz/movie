@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include header %>
+    
+
+    <table>
+      <tr>
+        <th>序号</th>
+        <th>标题</th>
+        <th>邮箱</th>
+        <th>内容</th>
+      </tr>
+
+      <% res.forEach(function(item,index){%>
+      <tr>
+        <td><%= (index+1) %></td>
+        <td><%= item.title %></td>
+        <td><%= item.email %></td>
+        <td><%- item.content%></td>
+      </tr>
+      <%  }) %>
+
+      <tr>
+        <td colspan="4">
+          <a href="./list?pageNo=1">首页</a>
+          <a href="./list?pageNo=<%= pageNo > 1 ? parseInt(pageNo)-1 :1 %>">上一页</a>
+          <a href="./list?pageNo=<%= pageNo < totalPages ? parseInt(pageNo) + 1: totalPages %>">下一页</a>
+          <a href="./list?pageNo=<%= totalPages%>">尾页</a>
+          <%= pageNo %> / <%= totalPages %> 共 <%= count %>条记录
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>
