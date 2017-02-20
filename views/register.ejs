@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Register</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>注册-草榴小电影</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="杨玉梅">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/bootstrap-3.3.0/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/login.css">
   </head>
   <body>
-    <%- include header %>
+    <form class="form-signin" action="./users/register" method="post">
+        <h2 class="form-signin-heading">请注册</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="用户名" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <label for="inputPassword" class="sr-only">RePassword</label>
+        <input type="password" name="repassword" id="inputPassword" class="form-control" placeholder="确认密码" required="">
     
-    <form action="./users/register" method="post">
+        <button ame="submit" class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+    </form>
+    
+    <!-- <form action="./users/register" method="post">
       <label>
         邮箱:<input type="text" name="email"/>
       </label>
@@ -17,6 +32,6 @@
       <label>
         <input type="submit" name="submit" value="提交" />
       </label> 
-    </form>
+    </form> -->
   </body>
 </html>

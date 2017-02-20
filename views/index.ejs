@@ -1,41 +1,237 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>
-    	html显示的内容
-    	<%- htmlView %>
-    </p>
-    <br/><br/>
-    <p>
-      email内容:
-      <!--
-      <%= email %>
-      -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>草榴小电影</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/bootstrap-3.3.0/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/stylesheets/index.css">
+	<link rel="stylesheet" href="/stylesheets/header.css">
 
-      <% if(!email){ %>
-        <div>
-          <input type="button" value="登录" onclick="location.href='/login'">
-          <input type="button" value="注册" onclick="location.href='/register'"/>
-        </div>
-      <%}else{%>
-        <div>
-          你好:<%= email %>
-          <input type="button" value="评论" onclick="location.href='/comment'"/>
-          <input type="button" value="退出" onclick="location.href='/logout'"/>
-        </div>
-      <%}%>
-    </p>
-    
-
-    <!-- top250 -->
-    <% movieTitle.forEach(function(item,index){%>
-        <div><%= item.title %></div>
-      <%  }) %>
-  </body>
+</head>
+<body>
+<%- include header %>
+<div id="header-bg" class="header header-bg-alt">
+	<div class="header-bg-image-alt"></div>
+	<img id="topnav" src="/images/beijingtu.bmp">
+</div>
+<!-- 电影图片展示区图片展示区 -->
+<section id="meet-speakers">
+	<div class="container-fluid" >
+		<!--正在热映-->
+		<h2 id="hotplay" class="text-center">正在热映</h2>
+		<p class="index_link">
+			<span class="highlight">第一时间欣赏本月正在热映的电影</span>
+		</p>
+		<p class="tab-p">LET YOU ENJOY THE FIRST TIME</p>
+		<div class="speakers">
+			<div class="row">
+				<% for(var i = 0; i < 6; i++){%>			
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="speaker-item">
+						<!-- 电影图片 -->
+						<a href="/comment?table=hot&id=<%=hot[i].id%>"><img src="<%= hot[i].images.large %>" class="speaker-img"></a>
+						<!-- 电影名字 -->
+						<h4><a href="/comment?table=hot&id=<%=hot[i].id%>"><%= hot[i].title %></a></h4>
+						<!-- 主演 -->
+						<h5>
+							<% hot[i].casts.forEach(function(i,x){%>
+								<span><%=i.name%></span>
+							<%})
+								
+							%>
+						</h5>
+					</div>
+				</div>
+				<%}%>
+				<!-- 清浮动 -->
+				<div class="clearfix visible-xs"></div>
+				<!-- 下面都是循环 -->
+				
+				<div class="clearfix visible-lg"></div>
+				<div class="clearfix visible-md"></div>
+				<div class="clearfix visible-xs"></div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="clearfix visible-lg"></div>
+					<div class="clearfix visible-md"></div>
+					<div class="clearfix visible-sm"></div>
+					<div class="clearfix visible-xs"></div>
+				</div>
+			</div>
+		</div>
+		<!--即将上映-->
+		<h3><a href="./movielist?cate=hot">查看更多</a></h3>
+		<h2 id="willplay" class="text-center">即将上映</h2>
+		<p class="index_link">
+			<span class="highlight">第一时间欣赏本月即将上映的电影</span>
+		</p>
+		<p class="tab-p">LET YOU ENJOY THE FIRST TIME</p>
+		<div class="speakers">
+			<div class="row">
+				<% for(var i = 0; i < 6; i++){%>			
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="speaker-item">
+						<!-- 电影图片 -->
+						<a href="./comment?table=coming&id=<%=coming[i].id%>"><img src="<%= coming[i].images.large %>" class="speaker-img"></a>
+						<!-- 电影名字 -->
+						<h4><a href="/comment"><%= coming[i].title %></a></h4>
+						<!-- 主演 -->
+						<h5>
+							<% coming[i].casts.forEach(function(i,x){%>
+								<span><%=i.name%></span>
+							<%})
+								
+							%>
+						</h5>
+					</div>
+				</div>
+				<%}%>
+				<!-- 清浮动 -->
+				<div class="clearfix visible-xs"></div>
+				<!-- 下面都是循环 -->
+				
+				<div class="clearfix visible-lg"></div>
+				<div class="clearfix visible-md"></div>
+				<div class="clearfix visible-xs"></div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="clearfix visible-lg"></div>
+					<div class="clearfix visible-md"></div>
+					<div class="clearfix visible-sm"></div>
+					<div class="clearfix visible-xs"></div>
+				</div>
+			</div>
+		</div>
+		<h3><a href="./movielist?cate=coming">查看更多</a></h3>
+		<!--top250-->
+		<h2 id="top250" class="text-center">Top250</h2>
+		<p class="index_link">
+			<span class="highlight">第一时间欣赏经典的电影</span>
+		</p>
+		<p class="tab-p">LET YOU ENJOY THE FIRST TIME</p>
+		<div class="speakers">
+			<div class="row">
+				<% for(var i = 0; i < 6; i++){%>			
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="speaker-item">
+						<!-- 电影图片 -->
+						<a href="./comment?table=top250&id=<%=top250[i].id%>"><img src="<%= top250[i].images.large %>" class="speaker-img"></a>
+						<!-- 电影名字 -->
+						<h4><a href="/comment"><%= top250[i].title %></a></h4>
+						<!-- 主演 -->
+						<h5>
+							<% top250[i].casts.forEach(function(i,x){%>
+								<span><%=i.name%></span>
+							<%})
+								
+							%>
+						</h5>
+					</div>
+				</div>
+				<%}%>
+				<!-- 清浮动 -->
+				<div class="clearfix visible-xs"></div>
+				<!-- 下面都是循环 -->
+				
+				<div class="clearfix visible-lg"></div>
+				<div class="clearfix visible-md"></div>
+				<div class="clearfix visible-xs"></div>
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="clearfix visible-lg"></div>
+					<div class="clearfix visible-md"></div>
+					<div class="clearfix visible-sm"></div>
+					<div class="clearfix visible-xs"></div>
+				</div>
+			</div>
+		</div>
+	
+			
+		<h3><a href="./movielist?cate=top250">查看更多</a></h3>
+	</div>
+</section>
+<!--开发者名单-->
+<section id="hotels">
+	<div class="container-fluid">
+		<h2>开发者名单</h2>
+		<div class="row">
+			<div class="col-xs-12 col-sm-9">
+				<p>哈哈，这是我们组的口号，还没想好</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-novotel">
+					<a href="http://www.accorhotels.com/gb/hotel-0753-novotel-new-york-times-square/index.shtml" class="hotel-name">项目经理：柯涛</a>
+					<div class="hotel-distance"><strong>职责：</strong> 端茶送水</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：杨玉梅</a>
+					<div class="hotel-distance"><strong>职责：</strong>颜值担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：陈明佳</a>
+					<div class="hotel-distance"><strong>职责：</strong>门面担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：陶欣钰</a>
+					<div class="hotel-distance"><strong>职责：</strong>青春担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：晏泽礼</a>
+					<div class="hotel-distance"><strong>职责：</strong>鸡汤担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：卢丽君</a>
+					<div class="hotel-distance"><strong>职责：</strong>鸡汤担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：郝展</a>
+					<div class="hotel-distance"><strong>职责：</strong>经纪人担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：卢丽君</a>
+					<div class="hotel-distance"><strong>职责：</strong>妻管严担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：卢丽君</a>
+					<div class="hotel-distance"><strong>职责：</strong>负颜值担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="hotel-description hotel-sheraton">
+					<a href="http://www.sheratonnewyork.com/" class="hotel-name">组员：冉娇</a>
+					<div class="hotel-distance"><strong>职责：</strong>逃课担当</div>
+					<div class="hotel-class">四川·成都</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<a href="#topnav" class="glyphicon glyphicon-hand-up" ></a>
+</body>
 </html>

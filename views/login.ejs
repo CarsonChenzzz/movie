@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>登陆-草榴小电影</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="杨玉梅">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/bootstrap-3.3.0/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/login.css">
   </head>
   <body>
-    <%- include header %>
-    <img src="/images/logo.png">
-    <form action="./users/login" method="post">
+    <div class="container">
+      <form class="form-signin" action="./users/login" method="post">
+        <h2 class="form-signin-heading">请登录</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="用户名" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me">记住我
+          </label>
+        </div>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">登陆</button>
+        <a href='/register' class="btn btn-lg btn-primary btn-block" type="btn" name="register">注册</a>
+      </form>
+    </div>
+    <!-- <form action="./users/login" method="post">
       <label>
         邮箱:<input type="text" name="email"/>
       </label>
@@ -17,6 +37,6 @@
       <label>
         <input type="submit" name="submit" value="提交" />
       </label> 
-    </form>
+    </form> -->
   </body>
 </html>

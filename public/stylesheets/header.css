@@ -1,0 +1,22 @@
+.navbar-static-top {
+    background: #fff;
+    height: 56px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+}
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+.nav > li a {
+    margin: 0 30px;
+    color: #4e4e4e;
+    padding: 20px 0 10px 0;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    background-color: transparent;
+}
+.nav > li a:hover{
+    background: #fff;
+    color: #E57D69;
+}

@@ -1,27 +1,72 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Comment</title>
+    <title>详情-草榴小电影</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
      <script type="text/javascript" src="javascripts/xheditor/jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="javascripts/xheditor/xheditor-1.2.2.min.js"></script>
     <script type="text/javascript" src="javascripts/xheditor/xheditor_lang/zh-cn.js"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+    <link rel='stylesheet' href='/stylesheets/comment.css'/>
+    <link rel="stylesheet" href="/bootstrap-3.3.0/dist/css/bootstrap.min.css"/>
+
   </head>
   <body>
-    <%- include header %>
-    <form action="/comment/submit" method="post" id="frmDemo">
+    <div class=" well"><a href="/"><<返回</a></div>
+  <!--点的那部电影，评论那部电影-->
+  <div class="container">
+    <!--这里是从数据库取到的对应的电影海报-->
+    <div class="movie">
+      <img src="<%= movieres[0].images.large %>">
+    </div>
+    <div class="movieDetail">
+      <!--这里是获得的电影名字-->
+      <h2 class="movieTitle"><%= movieres[0].title %><span class="movieScore"><%= movieres[0].rating.average %></span></h2>
+      <p class="movieActor"><span>主演：</span><% movieres[0].casts.forEach(function(i,x){%>
+                <span><%=i.name%></span>
+              <%})
+              %></p>
+      <p class="movieintorduce">早在1829年，比利时著名物理学家约瑟夫普拉多发现：当一个物体在人的眼前消失后，该物体的形象还会在人的视网膜上滞留一段时间，这一发现，被称之为“视象暂留原理”。普拉多根据此原理于1832年发明了“诡盘”。“诡盘”能使被描画在锯齿形的硬纸盘上的画片因运动而活动起来，而且能使视觉上产生的活动画面分解为各种不同的形象。“诡盘”的出现，标志着电影的发明进入到了科学实验阶段。1834年，美国人霍尔纳的“活动视盘”试验成功；1853年，奥地利的冯乌却梯奥斯将军在上述的发明基础上，运用幻灯，放映了原始的动画片。</p>
+      <p class="movieintorduce">摄影技术的改进，是电影得以诞生的重要前提，也可以认为摄影技术的发展为电影的发明提供了必备条件。早在1826年，法国的W尼埃普斯成功地拍摄了世界上第一张照片“窗外的景”，曝光时间8小时。而在初期的银板照相出现以后，一张照片缩短至30分钟左右，由于感光材料的不断更新使用，摄影的时间也在不断缩短。1840年拍摄一张照片仅需20分钟，1851年，湿性珂珞酊底版制成后，摄影速度就缩短到了1秒，这时候 “运动照片”的拍摄已经在克劳黛特、杜波斯克等人的实验拍摄中获得成功。1872年至1878年，美国旧金山的摄影师爱德华慕布里奇用24架照相机拍摄飞腾的奔马的分解动作组照，经过长达六年多的无数次拍摄实验终于成功，接着他又在幻灯上放映成功...</p>
+    </div>
+    <form action="/comment/submit_comment" method="post" id="frmDemo" class="cao">
+      <input type="hidden" name='movieid' id='movieid' value='<%=movieres[0].id%>'>
+      <!--<label>-->
+        <!--标题:<input type="text" name="title"/>-->
+      <!--</label>-->
+      <h2 class="words">评论</h2>
       <label>
-        标题:<input type="text" name="title"/>
+        <textarea cols='135' rows='10' name="comment_text" id="comment_text" placeholder="我来说两句"></textarea>
       </label>
-      <label>
-        内容:
-        <textarea cols="120" rows="30" name="content" id="content"></textarea>
-      </label>
-      <label>
-        <input type="submit" name="submit" value="提交" />
-      </label> 
+        <input type="submit" name="submit" value="发送" class="btn btn-default btnb"/>
     </form>
-
+    <!--别人关于这部电影的评论-->
+    <div class="comments">
+      <h2>最新评论</h2>
+      <% commentres.forEach(function(item,index){%>
+      <div class="usercomment">
+        <p class="username">
+          <span><%=item.subtime%></span>
+          <span><%=item.username%>:</span>
+        </p>
+        <p class="txt">
+          <%=item.comment%>
+        </p>
+      </div>
+      <img src="/svg/s.svg" alt="">
+      <%})%>
+      <div>
+       <a href="./comment?table=hot&id=<%=movieres[0].id%>&pageNo=1">首页</a>
+				<a href="./comment?table=hot&id=<%=movieres[0].id%>&pageNo=<%= pageNo > 1 ? parseInt(pageNo)-1:1%>">上一页</a>
+				<a href="./comment?table=hot&id=<%=movieres[0].id%>&pageNo=<%= pageNo < totalPages ? parseInt(pageNo) + 1 :totalPages%>">下一页</a>
+				<a href="./comment?table=hot&id=<%=movieres[0].id%>&pageNo=<%= totalPages %>">尾页</a>
+				<%= pageNo %> / <%= totalPages %>
+				共 <%= count %>条记录
+      </div>
+    </div>
+  </div>
+  <div id='btm'></div>
     <script type="text/javascript">
     $(pageInit);
     function pageInit()
@@ -30,21 +75,15 @@
       $('#content').xheditor({
         html5Upload:false,
         upMultiple:'1',
-
-        
         upLinkUrl:"upload.php",
         upLinkExt:"zip,rar,txt",
-
         upImgUrl:"/uploadImg",
         upImgExt:"jpg,jpeg,gif,png",
-
         upFlashUrl:"upload.php",
         upFlashExt:"swf",
-
         upMediaUrl:"upload.php",
         upMediaExt:"wmv,avi,wma,mp3,mid"
       });
-
     }
     function insertUpload(arrMsg)
     {console.log(arrMsg)

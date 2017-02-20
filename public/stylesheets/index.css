@@ -1,0 +1,84 @@
+body {
+    font-size: 16px;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-weight: 300;
+}
+.index_link {
+    font-size: 14px;
+    background: url(http://www.circler.cn/image/link.png) repeat-x;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.index_link span {
+    background: #fff;
+    padding: 0 5px;
+    font-size: 14px;
+    color: #ef7e00;
+}
+.tab-p {
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #999;
+    margin: 5px 0 20px 0;
+}
+.header{
+    padding-top: 56px;
+    overflow: hidden;
+    position: relative;
+}
+.header-bg-alt img{width: 100%}
+section {
+    padding: 60px 0;
+    border-bottom: 2px solid rgba(86, 72, 70, 0.3);
+}
+.container-fluid {
+    display: block;
+    text-align: center;
+}
+h2{
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    color: #4e4e4e;
+    font-size: 2.25em;
+    margin-bottom: 20px;
+}
+.speakers {
+    padding-top: 20px;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.speaker-item {
+    margin: 20px 0;
+}
+.speaker-img {
+    width: 260px;
+    height: 289px;
+    margin-bottom: 20px;
+}
+h4 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    color: #E57D69;
+    font-size: 1.5em;
+}
+a {
+    color: #E57D69;
+}
+h5 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+}
+.glyphicon-hand-up{
+    position: fixed;
+    top:90%;
+    right: 4%;
+    font-size: 30px;
+}

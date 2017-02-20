@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+//test
 // 引入session模块
 var session = require('express-session');
 
@@ -31,7 +31,7 @@ app.use(cookieParser());
 //session配置
 app.use(session({
 	secret:'recommend 128 bytes random string',
-	cookie:{maxAge:1000 * 60 *20 }, //设置session的有效时间
+	cookie:{maxAge:1000 * 60 * 20 }, //设置session的有效时间
 	resave:true, //如果来了一个新的请求，不管原来在还是不在，重新存储一个
 	saveUninitialized:true //设置一些未初始化的session
 }));
